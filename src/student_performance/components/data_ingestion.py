@@ -11,9 +11,9 @@ from dataclasses import dataclass
 from src.student_performance.components.data_transformation import DataTransformation
 from src.student_performance.components.data_transformation import DataTransformationConfig
 
+from src.student_performance.components.model_trainer import ModelTrainerconfig
+from src.student_performance.components.model_trainer import ModelTrainer
 
-from src.student_performance.components.model_tranier import ModelTrainer
-from src.student_performance.components.model_tranier import ModelTrainerconfig
 
 @dataclass
 class DataIngestionConfig:
@@ -53,11 +53,15 @@ class DataIngestion:
 
 
 if __name__=="__main__":
-    obj = DataIngestion()
-    train_data,test_data = obj.initiate_data_ingestion()
+    obj=DataIngestion()
+    train_data,test_data=obj.initiate_data_ingestion()
 
-    Data_transformation = DataTransformation()
-    train_arr,test_arr = Data_transformation.initiate_data_transformation(train_data,test_data) 
+    data_transformation=DataTransformation()
+    train_arr,test_arr,_=data_transformation.initiate_data_transformation(train_data,test_data)
+    try:
 
-    modeltrainer = ModelTrainer()
-    print(modeltrainer.initiate_model_trainer(train_arr,test_arr))
+        modeltrainer=ModelTrainer()
+        print(modeltrainer.initiate_model_trainer(train_arr,test_arr))
+
+    except Exception as e:
+        raise CustomException(e,sys)

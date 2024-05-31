@@ -6,5 +6,8 @@ matplotlib
 catboost
 Flask
 xgboost
-
--e .
+python_dotenv
+mysql_connector_python
+pymysql
+dill
+#-e .
